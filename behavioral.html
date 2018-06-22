@@ -30,7 +30,7 @@
             { b: 1, o: { popprob: 9, color: 'red' } },
             { b: 1, o: { popprob: 24, color: 'blue' } },
             { b: 1, o: { popprob: 10, color: 'red' } },
-            { b: 1, o: { popprob: 28, color: 'blue' } },
+            { b: 1, o: { popprob: 23, color: 'blue' } },
             { b: 1, o: { popprob: 11, color: 'red' } },
             { b: 1, o: { popprob: 28, color: 'blue' } },
             { b: 1, o: { popprob: 8, color: 'red' } },
@@ -45,8 +45,8 @@
             { b: 1, o: { popprob: 22, color: 'blue' } },
             { b: 1, o: { popprob: 12, color: 'red' } },
             { b: 1, o: { popprob: 27, color: 'blue' } },
-            { b: 1, o: { popprob: 8, color: 'red' } },// new      
-            { b: 1, o: { popprob: 12, color: 'blue' } },
+            { b: 1, o: { popprob: 8, color: 'red' } }, //last, 24th
+            { b: 1, o: { popprob: 12, color: 'blue' } },// new, 25th     
             { b: 1, o: { popprob: 22, color: 'red'} },
             { b: 1, o: { popprob: 8, color: 'blue' } },
             { b: 1, o: { popprob: 19, color: 'red' } },
@@ -55,9 +55,9 @@
             { b: 1, o: { popprob: 9, color: 'blue' } },
             { b: 1, o: { popprob: 22, color: 'red' } },
             { b: 1, o: { popprob: 8, color: 'blue' } },
-            { b: 1, o: { popprob: 10, color: 'red' } },
+            { b: 1, o: { popprob: 20, color: 'red' } },
             { b: 1, o: { popprob: 11, color: 'blue' } },
-            { b: 1, o: { popprob: 10, color: 'red' } },
+            { b: 1, o: { popprob: 20, color: 'red' } },
             { b: 1, o: { popprob: 8, color: 'blue' } },
             { b: 1, o: { popprob: 23, color: 'red' } },
             { b: 1, o: { popprob: 13, color: 'blue' } },
@@ -71,28 +71,57 @@
             { b: 1, o: { popprob: 12, color: 'blue' } },
             { b: 1, o: { popprob: 23, color: 'red' } },
         ];
+            // it should be 23
+            var round2 = balloons.length/2 - 1;
+            // it should be 47
+            var endgame = balloons.length - 1;
+            var discrimination = 3;
             var myStartRound1 = function(o, s) {
-                var even = 0, odd = 0;
-                for (var i=1; i <= s.id; i+=2) {
-                    even += parseInt($("#BARTpumps" + i).val());
-               }
-                for (var i=2; i <= s.id; i+=2) {
-                    odd += parseInt($("#BARTpumps" + i).val());
-               }
-                console.log("even:" + even + "odd:" + odd);
-                //TODO resgisterTrigger
-                //go to a new phase
-                if (s.id == 3) {
-                    return (balloons.length/2 - 1);
+                //odd is blue, even is red
+                var consecutive = 0;
+                console.log("id:" + s.id + "learned 1 and 2: " + o.learned1 + "," + o.learned2);
+                //if is the red balloon
+                if (s.id % 2 == 0) {
+                    for (var i=s.id; i >= 1; i-=2) {
+                        var red = parseInt($("#" + o.frmids_pumps[i-1]).val());
+                        var blue = parseInt($("#" + o.frmids_pumps[i-2]).val());
+                        console.log("red: " + red + ",blue: " + blue);
+                        if (s.id <= (round2+1)) {
+                            if ((blue - red) >= 10) {
+                                consecutive++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            if ((red - blue) >= 10) {
+                                consecutive++;
+                            } else {
+                                break;
+                            }
+                        }
+                        // X consectuives discriminations
+                        if (consecutive == discrimination) {
+                            // move to round2
+                            if (s.id <= round2) {
+                                o.learned1 = true;
+                                return round2;
+                            }
+                            //early ending, shall we keep it?
+                            else {
+                                o.learned2 = true;
+                                return endgame;
+                            }
+                        }
+                    }
                 }
-                //ends the game
-                if (s.pumps == 5) {
-                    return balloons.length - 1;
+                if ((o.earned == 10.00) || (!o.learned1 && s.id == (round2+1))) {
+                    //no discriminatory learning, abort
+                    return endgame;
                 }
             }
             
             var myEnd = function() {
-                alert('Parabéns!');
+                alert('Congrats! (TODO, trigger the other game)');
             }
             
             // create a BART with default values using 10 balloons

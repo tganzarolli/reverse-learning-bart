@@ -131,6 +131,8 @@
                 oninflate: function(s) {},    // function to run after inflation
                 onexplode: function(s) {},     // function to run after explosion
             },
+            learned1: false,
+            learned2: false,
             beforestart: function(s, t){},
             jump: 0,
             bgcol:               '#FFF',     // background color for complete board
@@ -599,8 +601,6 @@
                 .on('click.bart', function(e) {
                         
                     // check for explosion
-                    console.log('prob: ' + bal.popprob);
-                    console.log('pump: ' + bal.pumps);
                     if(bal.popprob == bal.pumps) {
                         
                         // explode balloon
