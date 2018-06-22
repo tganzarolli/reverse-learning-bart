@@ -158,7 +158,7 @@
                                              //    number of explosions for each balloon
             frmids_time:     [],             // optional ids of hidden form elements to save 
                                              //    mean latency between pumps (excluding time before first pump)
-            txt_cashin: '$$ Cash in $$',     // text on 'Cash in' button
+            txt_cashin: 'Collect points',     // text on 'Cash in' button
             txt_inflate: 'Inflate balloon',  // text on 'Inflate' button
             txt_next:    'Next balloon',     // text on 'Next' button
             txt_balloon_number: 'Balloon number: ',          // text for balloon number

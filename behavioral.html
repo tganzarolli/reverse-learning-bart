@@ -27,7 +27,7 @@
         // initialize the BART after the page has loaded
         $(document).ready(function() {            
             // create a BART with default values using 10 balloons
-            $("#bart").bart({ b: bookingTrial.balloons, o: {earnings: bookingTrial.money_per_pump, increment: 0.04}, s: {beforestart: bookingTrial.handleTurn, onend: myEnd}});
+            $("#bart").bart({ b: bookingTrial.balloons, o: {earnings: bookingTrial.money_per_pump, increment: 0.03, radius: 48}, s: {beforestart: bookingTrial.handleTurn, onend: myEnd, w:500, h:400}});
         });
     //]]>
     </script>
@@ -37,9 +37,12 @@
 
     <h1 style="text-align:center;">Balloon Analogue Risk Task (BART)</h1>
     <h2 style="text-align:center;">Behavioral Flexibility</h2>
-    <ol>
-        <li>Insert instructions here</li>
-    </ol>
+    <ul>
+        <li>The objective is to inflate the balloons as much as you can</li>
+        <li>You can use the "Collect points" button to save and move on to the next balloon</li>
+        <li>If a balloon pops, you'll lose all the points accumulated for that balloon</li>
+    </ul>
+</div>
     <form id='bartForm' name='bartForm' method="POST" action="">
         <div id="bart" style="margin: auto; text-align: center;"></div>
     </form>
