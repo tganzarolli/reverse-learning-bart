@@ -133,6 +133,7 @@
             },
             learned1: false,
             learned2: false,
+            popped: {},
             beforestart: function(s, t){},
             jump: 0,
             bgcol:               '#FFF',     // background color for complete board
@@ -357,9 +358,29 @@
             // sound
             if(opts.sounds == true & this.pumps > 0) {
                 if((new Audio()).canPlayType("audio/mpeg") != "") {   // mp3 for IE
-                    (new Audio(opts.sndpath + 'inflate.mp3')).play();
+                    var playPromise = (new Audio(opts.sndpath + 'inflate.mp3')).play();
+                    if (playPromise !== undefined) {
+                      playPromise.then(_ => {
+                        // Automatic playback started!
+                        // Show playing UI.
+                      })
+                      .catch(error => {
+                        // Auto-play was prevented
+                        // Show paused UI.
+                      });
+                    }
                 } else if((new Audio()).canPlayType("audio/x-wav")) { // wav for the rest
-                    (new Audio(opts.sndpath + 'inflate.wav')).play();
+                    var playPromise = (new Audio(opts.sndpath + 'inflate.wav')).play();
+                    if (playPromise !== undefined) {
+                      playPromise.then(_ => {
+                        // Automatic playback started!
+                        // Show playing UI.
+                      })
+                      .catch(error => {
+                        // Auto-play was prevented
+                        // Show paused UI.
+                      });
+                    }
                 }
             }
             
@@ -381,7 +402,17 @@
             
             // sound
             if(opts.sounds == true) {
-                snds.explode.play();
+                var playPromise = snds.explode.play();
+                if (playPromise !== undefined) {
+                  playPromise.then(_ => {
+                    // Automatic playback started!
+                    // Show playing UI.
+                  })
+                  .catch(error => {
+                    // Auto-play was prevented
+                    // Show paused UI.
+                  });
+                }
             }
             
             // set explosion state
@@ -731,7 +762,17 @@
                         
                     // sound
                     if(opts.sounds == true) {
-                        snds.cashin.play();
+                        var playPromise = snds.cashin.play();
+                        if (playPromise !== undefined) {
+                          playPromise.then(_ => {
+                            // Automatic playback started!
+                            // Show playing UI.
+                          })
+                          .catch(error => {
+                            // Auto-play was prevented
+                            // Show paused UI.
+                          });
+                        }
                     }
                         
                 });
