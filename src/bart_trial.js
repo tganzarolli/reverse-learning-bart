@@ -58,12 +58,12 @@ var bookingTrial = (function(){
     { b: 1, o: { popprob: 12, color: 'blue' } },
     { b: 1, o: { popprob: 23, color: 'red' } },
 ];
-    // it should be 24
-    var round2 = publicScope.balloons.length/2;
-    // it should be 48
-    var endgame = publicScope.balloons.length;
     
-    publicScope.myStartRound1 = function(o, s) {
+    publicScope.handleTurn = function(o, s) {
+        // it should be 24
+        var round2 = publicScope.balloons.length/2;
+        // it should be 48
+        var endgame = publicScope.balloons.length;
         //odd is blue, even is red for s.id. Reverse for index starting in 0
         var consecutive = 0;
         // console.log("id:" + s.id + "learned 1 and 2: " + o.learned1 + "," + o.learned2);
@@ -129,10 +129,6 @@ var bookingTrial = (function(){
             //no discriminatory learning, abort
             return endgame-1;
         }
-    }
-    
-    publicScope.myEnd = function() {
-        alert('Congrats! (TODO, trigger the other game)');
     }
     
     publicScope.money_per_pump = MONEY_PER_PUMP;

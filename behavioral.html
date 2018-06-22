@@ -20,10 +20,14 @@
     <script type="text/javascript">
     //<![CDATA[
     
+        var myEnd = function() {
+            alert('Game finished, click to go to the next page');
+            $("#bartForm").submit();
+        }
         // initialize the BART after the page has loaded
         $(document).ready(function() {            
             // create a BART with default values using 10 balloons
-            $("#bart").bart({ b: bookingTrial.balloons, o: {earnings: bookingTrial.money_per_pump, increment: 0.04}, s: {beforestart: bookingTrial.myStartRound1, onend: bookingTrial.myEnd}});
+            $("#bart").bart({ b: bookingTrial.balloons, o: {earnings: bookingTrial.money_per_pump, increment: 0.04}, s: {beforestart: bookingTrial.handleTurn, onend: myEnd}});
         });
     //]]>
     </script>
@@ -36,8 +40,9 @@
     <ol>
         <li>Insert instructions here</li>
     </ol>
-    <!-- load BART here -->
-    <div id="bart" style="margin: auto; text-align: center;"></div>
+    <form id='bartForm' name='bartForm' method="POST" action="">
+        <div id="bart" style="margin: auto; text-align: center;"></div>
+    </form>
         
 
 </body>
