@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+    <title>Behavioral</title>
+        
+    <meta charset="utf-8" />
+    
+    <!-- these files are required for the BART to work    -->
+    <script type="text/javascript" src="src/jquery-3.0.0.min.js"></script>    <!-- basic javascript library for dom manipulation -->
+    <script type="text/javascript" src="src/jcanvas.min.js"></script>          <!-- the canvas plugin -->
+    <script type="text/javascript" src="src/jquery.bart_reverse.js"></script>              <!-- the main BART plugin -->
+    <link rel="stylesheet" type="text/css" href="src/jquery.bart.css" />        <!-- additional styles for to make the BART look fancy -->
+        
+    <!-- additional scripts to run the demo on this page -->
+    <script type="text/javascript">
+    //<![CDATA[
+    
+        // initialize the BART after the page has loaded
+        $(document).ready(function() {
+        var balloons = 
+            [ { b: 1, o: { popprob: 26, color: 'blue' } },
+            { b: 1, o: { popprob: 11, color: 'red'} },
+            { b: 1, o: { popprob: 23, color: 'blue' } },
+            { b: 1, o: { popprob: 13, color: 'red' } },
+            { b: 1, o: { popprob: 27, color: 'blue' } },
+            { b: 1, o: { popprob: 9, color: 'red' } },
+            { b: 1, o: { popprob: 24, color: 'blue' } },
+            { b: 1, o: { popprob: 10, color: 'red' } },
+            { b: 1, o: { popprob: 28, color: 'blue' } },
+            { b: 1, o: { popprob: 11, color: 'red' } },
+            { b: 1, o: { popprob: 28, color: 'blue' } },
+            { b: 1, o: { popprob: 8, color: 'red' } },
+            { b: 1, o: { popprob: 28, color: 'blue' } },
+            { b: 1, o: { popprob: 12, color: 'red' } },
+            { b: 1, o: { popprob: 26, color: 'blue' } },
+            { b: 1, o: { popprob: 7, color: 'red' } },
+            { b: 1, o: { popprob: 22, color: 'blue' } },
+            { b: 1, o: { popprob: 10, color: 'red' } },
+            { b: 1, o: { popprob: 24, color: 'blue' } },
+            { b: 1, o: { popprob: 9, color: 'red' } },
+            { b: 1, o: { popprob: 22, color: 'blue' } },
+            { b: 1, o: { popprob: 12, color: 'red' } },
+            { b: 1, o: { popprob: 27, color: 'blue' } },
+            { b: 1, o: { popprob: 8, color: 'red' } },// new      
+            { b: 1, o: { popprob: 12, color: 'blue' } },
+            { b: 1, o: { popprob: 22, color: 'red'} },
+            { b: 1, o: { popprob: 8, color: 'blue' } },
+            { b: 1, o: { popprob: 19, color: 'red' } },
+            { b: 1, o: { popprob: 12, color: 'blue' } },
+            { b: 1, o: { popprob: 23, color: 'red' } },
+            { b: 1, o: { popprob: 9, color: 'blue' } },
+            { b: 1, o: { popprob: 22, color: 'red' } },
+            { b: 1, o: { popprob: 8, color: 'blue' } },
+            { b: 1, o: { popprob: 10, color: 'red' } },
+            { b: 1, o: { popprob: 11, color: 'blue' } },
+            { b: 1, o: { popprob: 10, color: 'red' } },
+            { b: 1, o: { popprob: 8, color: 'blue' } },
+            { b: 1, o: { popprob: 23, color: 'red' } },
+            { b: 1, o: { popprob: 13, color: 'blue' } },
+            { b: 1, o: { popprob: 19, color: 'red' } },
+            { b: 1, o: { popprob: 9, color: 'blue' } },
+            { b: 1, o: { popprob: 19, color: 'red' } },
+            { b: 1, o: { popprob: 7, color: 'blue' } },
+            { b: 1, o: { popprob: 24, color: 'red' } },
+            { b: 1, o: { popprob: 11, color: 'blue' } },
+            { b: 1, o: { popprob: 18, color: 'red' } },
+            { b: 1, o: { popprob: 12, color: 'blue' } },
+            { b: 1, o: { popprob: 23, color: 'red' } },
+        ];
+            var myStartRound1 = function(o, s) {
+                var even = 0, odd = 0;
+                for (var i=1; i <= s.id; i+=2) {
+                    even += parseInt($("#BARTpumps" + i).val());
+               }
+                for (var i=2; i <= s.id; i+=2) {
+                    odd += parseInt($("#BARTpumps" + i).val());
+               }
+                console.log("even:" + even + "odd:" + odd);
+                //TODO resgisterTrigger
+                //go to a new phase
+                if (s.id == 3) {
+                    return (balloons.length/2 - 1);
+                }
+                //ends the game
+                if (s.pumps == 5) {
+                    return balloons.length - 1;
+                }
+            }
+            
+            var myEnd = function() {
+                alert('Parabéns!');
+            }
+            
+            // create a BART with default values using 10 balloons
+            $("#bart").bart({ b: balloons, o: {earnings: 0.20, increment: 0.04}, s: {beforestart: myStartRound1, onend: myEnd}});
+        });
+    //]]>
+    </script>
+    
+    </head>
+    <body>
+
+    <h1 style="text-align:center;">Online Balloon Analogue Risk Task (oBART)</h1>
+    <h2 style="text-align:center;">Example 1</h2>
+                        
+    <!-- load BART here -->
+    <div id="bart" style="margin: auto; text-align: center;"></div>
+        
+    <p style="text-align:center;">For more information see <a href="http://timo.gnambs.at/">http://timo.gnambs.at</a>.</p>
+
+    <br /><br/>
+    <h2>Instructions</h2>
+    
+    <ol>
+        <li>Load all required files for the BART in the head of the page:
+<pre><code>
+&lt;script type="text/javascript" src="src/jquery-3.0.0.min.js"&gt;&lt;/script&gt;    &lt;!-- basic javascript library for dom manipulation --&gt;
+&lt;script type="text/javascript" src="src/jcanvas.min.js"&gt;&lt;/script&gt;          &lt;!-- the canvas plugin --&gt;
+&lt;script type="text/javascript" src="src/jquery.bart.new.js"&gt;&lt;/script&gt;       &lt;!-- the main BART plugin --&gt;
+&lt;link rel="stylesheet" type="text/css" href="src/jquery.bart.css" /&gt;    &lt;!-- additional styles for to make the BART look fancy --&gt;
+</pre></code>
+        </li>
+        <li>Create an element in the body of the page with a unique <code>id</code>-attribute (here: "bart"):
+<pre><code>&lt;div id="bart"&gt;&lt;/div&gt;</pre></code>
+        </li>
+        <li>Create a script section in the head of the page:
+<pre><code>
+&lt;script type="text/javascript"&gt;
+&lt;/script&gt;
+</pre></code>
+        </li>
+        <li>Initialize the BART script after the page has loaded:
+<pre><code>
+&lt;script type="text/javascript"&gt;
+    $(document).ready(function() {   // initialize the BART after the page has loaded
+    });
+&lt;/script&gt;
+</pre></code>
+        </li>
+        <li>Define the BART (e.g., number and color of balloons) using the <code>id</code> defined in step 2 (see head of <code>src/jquery.bart.js</code> for configuration options):
+<pre><code>
+&lt;script type="text/javascript"&gt;
+    $(document).ready(function() {   // initialize the BART after the page has loaded
+        $("#bart").bart( 10 );   // create a BART with default values using 10 balloons
+    });
+&lt;/script&gt;
+</pre></code>
+        If only a single number is passed to the <code>bart()</code>-function, the number indicates the number of balloons.
+        </li>
+    </ol>
+    
+
+       
+    </body>
+
+</html>
