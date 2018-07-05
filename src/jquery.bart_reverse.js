@@ -479,16 +479,22 @@
                     'background-color': opts.bgcol,
                     overflow:           'hidden'
                 });
+                $('.speaker').click(function(e) {
+                  e.preventDefault();
+                  opts.sounds = !opts.sounds;
+                  $(this).toggleClass('mute');
+                });
             canvas = $('<canvas>')
                 .attr({   // canvas
                     width:  opts.w + 'px',       
-                    height: opts.h - 100 + 'px',
-                    margin: 0 
+                    height: opts.h - 150 + 'px',
+                    margin: 0
                 })
                 .css({ 
                     'background-color': opts.bgcol 
                 })
                 .appendTo(this);
+                
             var divBottom = $('<div>').addClass('BARTbottom');  // footer
             divBottom
                 .css({ 
