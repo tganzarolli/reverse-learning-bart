@@ -19,7 +19,7 @@
      * Creates a Ballon Analogue Risk Task (BART). For more information see:
      *  Lejuez, C. W., Read, J. P., Kahler, C. W., Richards, J. B., Ramsey, S. E., & Stuart, G. L. (2002). 
      *      Evaluation of a behavioral measure of risk taking: The Balloon Analogue Risk Task (BART). 
-     *      Journal of Experimental Psychology, 8, 75�84.
+     *      Journal of Experimental Psychology, 8, 7584.
      *
      * NOTE: There is no warranty at all that this online test does indeed and can measure
      *       the same construct as the orignial test. If you use this script do it on your own risk!
@@ -158,9 +158,9 @@
                                              //    number of explosions for each balloon
             frmids_time:     [],             // optional ids of hidden form elements to save 
                                              //    mean latency between pumps (excluding time before first pump)
-            txt_cashin: 'Collect points',     // text on 'Cash in' button
-            txt_inflate: 'Inflate balloon',  // text on 'Inflate' button
-            txt_next:    'Next balloon',     // text on 'Next' button
+            txt_cashin: 'Collect points 💰',     // text on 'Cash in' button
+            txt_inflate: 'Inflate balloon 💨',  // text on 'Inflate' button
+            txt_next:    'Next balloon ➡',     // text on 'Next' button
             txt_balloon_number: 'Balloon number: ',          // text for balloon number
             txt_number_of_pumps: 'Number of pumps: ',        // text for number of pumps
             txt_current_earned: 'Current earned: ',          // text for current earnings
@@ -487,7 +487,7 @@
             canvas = $('<canvas>')
                 .attr({   // canvas
                     width:  opts.w + 'px',       
-                    height: opts.h - 150 + 'px',
+                    height: opts.h - 145 + 'px',
                     margin: 0
                 })
                 .css({ 

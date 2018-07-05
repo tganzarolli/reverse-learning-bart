@@ -2,8 +2,9 @@ var bookingTrial = (function(){
     // constants 
     const CONSECUTIVE_THRESHOLD = 3;
     const PUMPS_THRESHOLD = 10;
-    const UPPER_BOUND_POP = 3;
-    const LOWER_BOUND_POP = 1;
+    // this threshold was not actually used as discrimation, just end the game earlier if there aren't not enough chances to learn
+    const UPPER_BOUND_POP = 21;
+    const LOWER_BOUND_POP = 21;
     const MONEY_EARNED_THRESHOLD = 10.00;
     const MONEY_PER_PUMP = 0.02;
     
@@ -94,6 +95,12 @@ var bookingTrial = (function(){
         //if is the red balloon
         if (s.id % 2 == 0) {
             for (var i=s.id; i >= 1; i-=2) {
+                // disregard popped ballons
+                var redExploded = parseInt($("#" + o.frmids_exploded[i-1]).val());
+                var blueExploded = parseInt($("#" + o.frmids_exploded[i-2]).val());
+                if (redExploded || blueExploded) {
+                    continue;
+                }
                 var red = parseInt($("#" + o.frmids_pumps[i-1]).val());
                 var blue = parseInt($("#" + o.frmids_pumps[i-2]).val());
                 //console.log("red: " + red + ",blue: " + blue);
